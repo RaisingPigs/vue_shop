@@ -1,4 +1,9 @@
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from 'vue-router';
+
+/*使用路由*/
+Vue.use(VueRouter);
+
 import Login from "@/pages/Login";
 import Home from "@/pages/Home";
 import Welcome from "@/pages/Welcome";
@@ -18,13 +23,13 @@ const router = new VueRouter({
         {
             /*访问主页面时, 重定向到登录页面*/
             path: '/',
-            redirect: '/home'
+            redirect: '/login'
         },
         {
             name: 'login',
             path: '/login',
             component: Login,
-            meta: {isAuth: true, title: '登录'}
+            meta: {isAuth: false, title: '登录'}
         },
         {
             name: 'home',
@@ -105,9 +110,19 @@ const router = new VueRouter({
 });
 
 /*全局前置路由守卫: 初始化时调用, 每次路由切换之前被调用*/
-// router.beforeEach((to, from, next) => {
-// 
-// });
+router.beforeEach((to, from, next) => {
+    /*判断是否需要鉴权*/
+    if (to.meta.isAuth) {
+        if (sessionStorage.getItem('token')) {
+            next();
+        } else {
+            alert('请先登录');
+            next('/login');
+        }
+    } else {
+        next();
+    }
+});
 
 /*全局后置路由守卫: 初始化时调用, 每次路由切换之后被调用*/
 router.afterEach((to, from) => {
