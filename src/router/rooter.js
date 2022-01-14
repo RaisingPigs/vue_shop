@@ -1,22 +1,21 @@
-import Vue from "vue";
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 /*使用路由*/
 Vue.use(VueRouter);
 
-import Login from "@/pages/Login";
-import Home from "@/pages/Home";
-import Welcome from "@/pages/Welcome";
-import Index from "@/pages/Index"
-import Users from "@/pages/user/Users";
-import Rights from "@/pages/power/Rights";
-import Roles from "@/pages/power/Roles";
-import GoodsList from "@/pages/goods/GoodsList";
-import Category from "@/pages/goods/Category";
-import Params from "@/pages/goods/Params";
-import Order from "@/pages/order/Order";
-import Statistics from "@/pages/Statistics/Statistics";
-import Report from "@/pages/Statistics/Report";
+import Login from '@/pages/Login';
+import Home from '@/pages/Home';
+import Welcome from '@/pages/Welcome';
+import Users from '@/pages/user/Users';
+import Rights from '@/pages/power/Rights';
+import Roles from '@/pages/power/Roles';
+import Goods from '@/pages/goods/Goods';
+import Categories from '@/pages/goods/Categories';
+import Params from '@/pages/goods/Params';
+import Orders from '@/pages/order/Orders';
+import Statistics from '@/pages/Statistics/Statistics';
+import Reports from '@/pages/Statistics/Reports';
 
 const router = new VueRouter({
     routes: [
@@ -29,83 +28,77 @@ const router = new VueRouter({
             name: 'login',
             path: '/login',
             component: Login,
-            meta: {isAuth: false, title: '登录'}
+            meta: { isAuth: false, title: '登录' }
         },
         {
             name: 'home',
             path: '/home',
             component: Home,
-            meta: {isAuth: true, title: '主页'},
+            meta: { isAuth: true, title: '主页' },
             redirect: '/home/welcome',
             children: [
                 {
                     name: 'welcome',
                     path: 'welcome',
                     component: Welcome,
-                    meta: {isAuth: true, title: '欢迎'},
-                },
-                {
-                    name: 'index',
-                    path: 'index',
-                    component: Index,
-                    meta: {isAuth: true, title: '首页'},
+                    meta: { isAuth: true, title: '欢迎' }
                 },
                 {
                     name: 'users',
                     path: 'users',
                     component: Users,
-                    meta: {isAuth: true, title: '用户列表'},
+                    meta: { isAuth: true, title: '用户列表' }
                 },
                 {
                     name: 'rights',
                     path: 'rights',
                     component: Rights,
-                    meta: {isAuth: true, title: '权限列表'},
+                    meta: { isAuth: true, title: '权限列表' }
                 },
                 {
                     name: 'roles',
                     path: 'roles',
                     component: Roles,
-                    meta: {isAuth: true, title: '角色权限'},
+                    meta: { isAuth: true, title: '角色权限' }
                 },
                 {
-                    name: 'goods-list',
-                    path: 'goods-list',
-                    component: GoodsList,
-                    meta: {isAuth: true, title: '商品列表'},
+                    name: 'goods',
+                    path: 'goods',
+                    component: Goods,
+                    meta: { isAuth: true, title: '商品列表' }
                 },
                 {
-                    name: 'category',
-                    path: 'category',
-                    component: Category,
-                    meta: {isAuth: true, title: '商品分类'},
+                    name: 'categories',
+                    path: 'categories',
+                    component: Categories,
+                    meta: { isAuth: true, title: '商品分类' }
                 },
                 {
                     name: 'params',
                     path: 'params',
                     component: Params,
-                    meta: {isAuth: true, title: '分类参数'},
+                    meta: { isAuth: true, title: '分类参数' }
                 },
                 {
-                    name: 'order',
-                    path: 'order',
-                    component: Order,
-                    meta: {isAuth: true, title: '订单管理'},
+                    name: 'orders',
+                    path: 'orders',
+                    component: Orders,
+                    meta: { isAuth: true, title: '订单管理' }
                 },
                 {
                     name: 'statistics',
                     path: 'statistics',
                     component: Statistics,
-                    meta: {isAuth: true, title: '数据总览'},
+                    meta: { isAuth: true, title: '数据总览' }
                 },
                 {
-                    name: 'report',
-                    path: 'report',
-                    component: Report,
-                    meta: {isAuth: true, title: '数据报表'},
-                },
+                    name: 'reports',
+                    path: 'reports',
+                    component: Reports,
+                    meta: { isAuth: true, title: '数据报表' }
+                }
             ]
-        },
+        }
     ]
 });
 
