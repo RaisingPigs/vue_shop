@@ -63,35 +63,35 @@ export default {
                     { required: true, message: '请输入密码', trigger: 'blur' }
                 ]
             }
-        }
+        };
     },
     methods: {
         login() {
             /*用async将其变为一个异步函数*/
             this.$refs.loginFormRef.validate(async (valid) => {
                 if (!valid) {
-                    return false
+                    return false;
                 }
                 /*await操作符用于等待一个Promise对象。它只能在异步(async)函数中使用*/
                 /*解构赋值data, 并将其重命名为res*/
-                const { data: res } = await this.$http.post('login', this.loginForm)
+                const { data: res } = await this.$http.post('login', this.loginForm);
                 /*弹出登录成功或失败的的提示消息*/
                 if (res.meta.status !== 200) {
-                    this.$message.error({ message: '登录失败', center: true })
-                    return false
+                    this.$message.error({ message: '登录失败', center: true });
+                    return false;
                 } else {
-                    this.$message.success({ message: '登录成功', center: true })
+                    this.$message.success({ message: '登录成功', center: true });
 
                     /*保存token*/
-                    sessionStorage.setItem('token', res.data.token)
+                    sessionStorage.setItem('token', res.data.token);
                     /*跳转到主页*/
-                    await this.$router.push('/home')
-                    return true
+                    await this.$router.push('/home');
+                    return true;
                 }
-            })
-        },
+            });
+        }
     }
-}
+};
 </script>
 
 <style scoped>
