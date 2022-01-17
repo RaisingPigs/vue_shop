@@ -6,13 +6,16 @@
                  text-color='#fff'
                  :collapse='isCollapse'
                  :collapse-transition='false'
-                 :default-active='this.$route.name'
+                 :default-active='subMenuPath'
                  unique-opened
                  router>
 
             <!--一级菜单-->
             <!--两层for循环遍历出菜单-->
-            <el-submenu :index='String(item.id)' v-for='item in menuList' :key='item.id'>
+            <el-submenu
+                :index='String(item.id)'
+                v-for='item in menuList'
+                :key='item.id'>
                 <template slot='title'>
                     <i :class='menuIconObj[item.id]' class=' aside_icon'></i>
                     <span>{{ item.authName }}</span>
@@ -20,7 +23,11 @@
 
                 <!--二级菜单-->
                 <!--index值为跳转路径-->
-                <el-menu-item :index='subItem.path' v-for='subItem in item.children' :key='subItem.id'>
+                <el-menu-item
+                    :index='subItem.path'
+                    v-for='subItem in item.children'
+                    :key='subItem.id'
+                    @click='subMenuClk'>
                     <i class='el-icon-menu aside_icon'></i>
                     {{ subItem.authName }}
                 </el-menu-item>
@@ -46,6 +53,17 @@ export default {
         };
     },
     props: ['isCollapse'],
+    computed: {
+        subMenuPath() {
+            /*获取当前子菜单的路径, 赋值给default-active
+            * this.$route.path = /home/goods
+            * replace替换后为 goods*/
+            return this.$route.path.replace("/home/", ""); 
+            
+            /*法二: 用name*/
+            // return this.$route.name; 
+        }
+    },
     methods: {
         async getMenuList() {
             const { data: res } = await this.$http.get('menus');
