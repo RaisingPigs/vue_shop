@@ -26,8 +26,7 @@
                 <el-menu-item
                     :index='subItem.path'
                     v-for='subItem in item.children'
-                    :key='subItem.id'
-                    @click='subMenuClk'>
+                    :key='subItem.id'>
                     <i class='el-icon-menu aside_icon'></i>
                     {{ subItem.authName }}
                 </el-menu-item>
@@ -73,7 +72,6 @@ export default {
             }
 
             this.menuList = res.data;
-            console.log(res);
         }
     },
     mounted() {

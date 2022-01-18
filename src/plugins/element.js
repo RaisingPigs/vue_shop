@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue';
 
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -21,8 +21,18 @@ import {
     Menu,
     Submenu,
     MenuItem,
-    Message
-} from "element-ui";
+    Message,
+    Breadcrumb,
+    BreadcrumbItem,
+    Card,
+    Table,
+    TableColumn,
+    Tooltip,
+    Switch,
+    Pagination,
+    Dialog,
+    MessageBox
+} from 'element-ui';
 
 Vue.use(Button);
 Vue.use(Form);
@@ -43,3 +53,13 @@ Vue.use(Menu);
 Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.prototype.$message = Message;
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
+Vue.use(Card);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Tooltip);
+Vue.use(Switch);
+Vue.use(Pagination);
+Vue.use(Dialog);
+Vue.prototype.$confirm = MessageBox.confirm;

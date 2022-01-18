@@ -17,7 +17,7 @@
                     <el-input
                         v-model.trim='loginForm.username'
                         prefix-icon='el-icon-user'
-                        placeholder='请输入密码'
+                        placeholder='请输入用户名'
                         clearable>
                     </el-input>
                 </el-form-item>
