@@ -1,13 +1,13 @@
 <template>
     <div>
         <!--面包屑导航-->
-        <Breadcrumb :navList='navList'></Breadcrumb>
+        <Breadcrumb :nav-list='navList'></Breadcrumb>
 
         <!--卡片视图-->
-        <el-card class='box-card user_card'>
+        <el-card>
             <!--用户列表头部文字-->
-            <el-row slot='header' class='user_title'>
-                <span class='user_span'>用户列表</span>
+            <el-row slot='header' class='card_title'>
+                <span>用户列表</span>
             </el-row>
 
             <!--搜索框-->
@@ -107,7 +107,7 @@
                                     size='mini'
                                     type='warning'
                                     icon='el-icon-setting'
-                                    @click='setAuthorizeUserDialog(scope.row)'>
+                                    @click='showSetRoleDialog(scope.row)'>
                                 </el-button>
                             </el-tooltip>
                         </template>
@@ -232,6 +232,43 @@
                     <el-button type='primary' @click='editUser'>确 定</el-button>
                 </div>
             </el-dialog>
+
+            <!--分配角色对话框-->
+            <el-dialog
+                title='分配角色'
+                :visible.sync='roleDialogVisible'
+                width='50%'
+                :close-on-click-modal='false'
+                @close='resetRoleFrom'>
+
+                <el-form label-width='100px' :model='setRoleForm' label-suffix=': '>
+                    <el-form-item label='用户名'>
+                        <el-input v-model='setRoleForm.username' disabled></el-input>
+                    </el-form-item>
+                    <el-form-item label='用户角色'>
+                        <el-input v-model='setRoleForm.roleName' disabled></el-input>
+                    </el-form-item>
+                    <el-form-item label='分配新角色'>
+                        <el-select
+                            v-model='setRoleForm.roleId'
+                            placeholder='请选择新角色'
+                            clearable>
+                            <el-option
+                                v-for='role in roleList'
+                                :key='role.id'
+                                :label='role.roleName'
+                                :value='role.id'>
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-form>
+
+                <span slot='footer' class='dialog-footer'>
+                    <el-button @click='roleDialogVisible = false'>取 消</el-button>
+                    <el-button type='primary' @click='setRole'>确 定</el-button>
+                </span>
+            </el-dialog>
+
         </el-card>
     </div>
 </template>
@@ -330,6 +367,18 @@ export default {
                 username: '',
                 email: '',
                 mobile: ''
+            },
+
+            /*显示分配角色对话框*/
+            roleDialogVisible: false,
+            /*角色列表*/
+            roleList: [],
+            /*分配角色表单*/
+            setRoleForm: {
+                userId: '',
+                username: '',
+                roleName: '',
+                roleId: ''
             }
         };
     },
@@ -471,6 +520,56 @@ export default {
                 /*刷新用户列表*/
                 await this.getUserList();
             }
+        },
+
+        /*打开分配角色对话框, 并回显数据*/
+        async showSetRoleDialog(user) {
+            /*回显用户数据*/
+            this.setRoleForm.userId = user.id;
+            this.setRoleForm.username = user.username;
+            this.setRoleForm.roleName = user.role_name;
+
+            console.log(this);
+
+            /*发送请求获取角色列表*/
+            const { data: res } = await this.$http.get('roles');
+            if (res.meta.status !== 200) {
+                return this.$message.error({ message: '获取角色列表失败', center: true });
+            }
+
+            /*回显角色列表的数据到roleList*/
+            this.roleList = res.data;
+
+            /*显示对话框*/
+            this.roleDialogVisible = true;
+        },
+
+        /*设置用户角色*/
+        async setRole() {
+            /*发送请求修改用户角色*/
+            const { data: res } = await this.$http.put(`users/${this.setRoleForm.userId}/role`, { rid: this.setRoleForm.roleId });
+
+            /*失败处理*/
+            if (res.meta.status !== 200) {
+                return this.$message.error({ message: '修改用户角色失败', center: true });
+            }
+
+            /*成功处理*/
+            this.$message.success({ message: '修改用户角色成功', center: true });
+            await this.getUserList();
+
+            this.roleDialogVisible = false;
+        },
+
+        /*对话框关闭, 重置角色分配表单*/
+        resetRoleFrom() {
+            this.setRoleForm.userId = '';
+            this.setRoleForm.username = '';
+            this.setRoleForm.roleId = '';
+            this.setRoleForm.roleName = '';
+
+            /*这里如果直接将setRoleForm置为空对象, 当打开数据分配角色对话框时, 直接分配属性会失去get set, 从而失去双向绑定的效果*/
+            // this.setRoleForm = {};
         }
     },
     mounted() {
@@ -480,12 +579,5 @@ export default {
 </script>
 
 <style scoped>
-.user_card .user_title {
-    text-align: center;
-}
 
-.user_card span {
-    font-size: 24px;
-    font-weight: 600;
-}
 </style>

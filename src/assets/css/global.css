@@ -4,6 +4,7 @@ html, body, #app {
     height: 100%;
     padding: 0;
     margin: 0;
+    min-width: 1366px;
 }
 
 .el-breadcrumb {
@@ -12,6 +13,15 @@ html, body, #app {
 
 .el-card {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
+}
+
+.el-card .card_title {
+    text-align: center;
+}
+
+.el-card .card_title span {
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .el-table {
