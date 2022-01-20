@@ -25,7 +25,7 @@
             <!--角色表格区-->
             <el-row>
                 <el-table
-                    height='520'
+                    max-height='520'
                     :data='roleList'
                     style='width: 100%'
                     border
