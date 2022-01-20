@@ -529,8 +529,6 @@ export default {
             this.setRoleForm.username = user.username;
             this.setRoleForm.roleName = user.role_name;
 
-            console.log(this);
-
             /*发送请求获取角色列表*/
             const { data: res } = await this.$http.get('roles');
             if (res.meta.status !== 200) {

@@ -4,9 +4,9 @@
         <Breadcrumb :nav-list='navList'></Breadcrumb>
 
         <el-card>
-            <!--权限列表头部文字-->
+            <!--角色列表头部文字-->
             <el-row slot='header' class='card_title'>
-                <span>权限列表</span>
+                <span>角色列表</span>
             </el-row>
 
             <!--搜索框和添加角色框-->
@@ -25,6 +25,7 @@
             <!--角色表格区-->
             <el-row>
                 <el-table
+                    height='520'
                     :data='roleList'
                     style='width: 100%'
                     border

@@ -12,6 +12,7 @@
 
             <!--权限表格-->
             <el-table
+                height='560'
                 :data='rightsList'
                 style='width: 100%'
                 border
