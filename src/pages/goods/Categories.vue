@@ -176,7 +176,7 @@ export default {
             /*面包屑导航文字*/
             navList: [
                 { navName: '首页', navHref: '/home' },
-                { navName: '商品管理', navHref: '' },
+                { navName: '商品管理', navHref: '/home' },
                 { navName: '商品分类', navHref: '' }
             ],
 

@@ -309,7 +309,7 @@ export default {
             /*面包屑导航区*/
             navList: [
                 { navName: '首页', navHref: '/home' },
-                { navName: '用户管理', navHref: '' },
+                { navName: '用户管理', navHref: '/home' },
                 { navName: '用户列表', navHref: '' }
             ],
 

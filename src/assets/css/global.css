@@ -49,3 +49,11 @@ html, body, #app {
     width: 24px;
     height: 24px;
 }
+
+.el-steps {
+    margin: 15px 0;
+}
+
+.ql-editor {
+    min-height: 460px;
+}

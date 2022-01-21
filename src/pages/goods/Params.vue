@@ -276,7 +276,7 @@ export default {
             /*面包屑导航区*/
             navList: [
                 { navName: '首页', navHref: '/home' },
-                { navName: '商品管理', navHref: '' },
+                { navName: '商品管理', navHref: '/home' },
                 { navName: '分类参数', navHref: '' }
             ],
             /*三级分类列表*/

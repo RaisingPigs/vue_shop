@@ -177,7 +177,7 @@ export default {
             /*头部面包屑导航*/
             navList: [
                 { navName: '首页', navHref: '/home' },
-                { navName: '权限管理', navHref: '' },
+                { navName: '权限管理', navHref: '/home' },
                 { navName: '角色列表', navHref: '' }
             ],
 

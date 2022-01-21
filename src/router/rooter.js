@@ -16,6 +16,7 @@ import Params from '@/pages/goods/Params';
 import Orders from '@/pages/order/Orders';
 import Statistics from '@/pages/Statistics/Statistics';
 import Reports from '@/pages/Statistics/Reports';
+import Add from '@/pages/goods/Add';
 
 const router = new VueRouter({
     routes: [
@@ -66,6 +67,12 @@ const router = new VueRouter({
                     path: 'goods',
                     component: Goods,
                     meta: { isAuth: true, title: '商品列表' }
+                },
+                {
+                    name: 'add',
+                    path: 'add',
+                    component: Add,
+                    meta: { isAuth: true, title: '添加商品' }
                 },
                 {
                     name: 'categories',

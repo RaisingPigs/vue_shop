@@ -67,7 +67,7 @@ export default {
             /*面包屑导航区*/
             navList: [
                 { navName: '首页', navHref: '/home' },
-                { navName: '权限管理', navHref: '' },
+                { navName: '权限管理', navHref: '/home' },
                 { navName: '权限列表', navHref: '' }
             ],
 
