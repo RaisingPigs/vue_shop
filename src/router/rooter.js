@@ -14,7 +14,6 @@ import Goods from '@/pages/goods/Goods';
 import Categories from '@/pages/goods/Categories';
 import Params from '@/pages/goods/Params';
 import Orders from '@/pages/order/Orders';
-import Statistics from '@/pages/Statistics/Statistics';
 import Reports from '@/pages/Statistics/Reports';
 import Add from '@/pages/goods/Add';
 
@@ -91,12 +90,6 @@ const router = new VueRouter({
                     path: 'orders',
                     component: Orders,
                     meta: { isAuth: true, title: '订单管理' }
-                },
-                {
-                    name: 'statistics',
-                    path: 'statistics',
-                    component: Statistics,
-                    meta: { isAuth: true, title: '数据总览' }
                 },
                 {
                     name: 'reports',
