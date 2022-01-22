@@ -385,6 +385,11 @@ export default {
     methods: {
         /*获取用户*/
         async getUserList() {
+            /*如果查询参数不为空, 则是搜索查询, 应当重置页码*/
+            if (this.queryInfo.query.trim() !== '' || this.queryInfo.query.length !== 0) {
+                this.queryInfo.pagenum = 1;
+            }
+            
             /*发送请求获取用户列表*/
             const { data: res } = await this.$http.get('users', { params: this.queryInfo });
 
